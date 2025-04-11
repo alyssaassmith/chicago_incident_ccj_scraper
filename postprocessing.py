@@ -171,7 +171,7 @@ drop_cols = [
     'x_coordinate', 'y_coordinate', 'updated_on', 'latitude', 'longitude', 'location', 'MONTH', 'DAY', 'arrest', 'iucr', 'domestic', 'year'
 ]
 df.drop(columns=drop_cols, inplace=True)
-col_rename = {'district':'District','ward':'Ward','community_area':'CommunityArea','IndexOffensed':'IndexOffense'}
+col_rename = {'district':'District','ward':'Ward','community_area':'CommunityArea','IndexOffensedd':'IndexOffense'}
 df.rename(col_rename,axis=1)
 output_csv = "incident.csv"
 #df.to_csv(output_csv, index=False, encoding='utf-8')
