@@ -123,7 +123,11 @@ df = df[df['inc_data_read'] >= '2018-01-01']
 lookup_path = "data/cpd_offense_lookup.csv"
 lookup = pd.read_csv(lookup_path, )
 
-df = df.merge(lookup, left_on=['iucr'], right_on=['IUCR'], how='left')
+df['iucr'] = df['iucr'].str.replace(r'\D', '', regex=True)
+df['iucr'] = pd.to_numeric(df['iucr'], errors='coerce').astype(int)
+lookup['IUCR'] =  pd.to_numeric(lookup['IUCR'], errors='coerce').astype(int)
+
+df = df.merge(lookup, left_on='iucr',right_on='IUCR', how='left')
 
 print(lookup.dtypes)
 
@@ -182,6 +186,7 @@ col_rename = {'district':'District','ward':'Ward','community_area':'CommunityAre
 df = df.rename(col_rename,axis=1)
 
 print(df.columns)
+print(df.isnull().sum())
 output_csv = "incident.csv"
 #df.to_csv(output_csv, index=False, encoding='utf-8')
 
