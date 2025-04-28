@@ -124,8 +124,8 @@ lookup_path = "data/cpd_offense_lookup.csv"
 lookup = pd.read_csv(lookup_path, )
 
 df['iucr'] = df['iucr'].str.replace(r'\D', '', regex=True)
-df['iucr'] = pd.to_numeric(df['iucr'], errors='coerce').astype(int)
-lookup['IUCR'] =  pd.to_numeric(lookup['IUCR'], errors='coerce').astype(int)
+df['iucr'] = pd.to_numeric(df['iucr'], errors='coerce').fillna(0).astype(int)
+lookup['IUCR'] =  pd.to_numeric(lookup['IUCR'], errors='coerce').fillna(0).astype(int)
 
 df = df.merge(lookup, left_on='iucr',right_on='IUCR', how='left')
 
