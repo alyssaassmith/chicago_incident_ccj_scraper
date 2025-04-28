@@ -172,7 +172,7 @@ drop_cols = [
 ]
 df.drop(columns=drop_cols, inplace=True)
 
-
+print(df['date'].max())
 
 col_rename = {'district':'District','ward':'Ward','community_area':'CommunityArea'}
 df = df.rename(col_rename,axis=1)
