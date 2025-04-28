@@ -67,6 +67,9 @@ def inc_data_read(start_year = 2018, full_dataset = True, convert_cook_crs = Tru
     inc_df_list = []
     
     for year in range(start_year, current_yr + 1):
+
+        print(year)
+        
         inc_data_yr = pd.read_csv(
             f'https://data.cityofchicago.org/resource/ijzp-q8t2.csv?$limit={limit}&$where=date%20between%20%27{year}-01-01T00:00:00%27%20and%20%27{year}-12-31T23:59:59%27', storage_options={'verify': False}
         )
@@ -166,13 +169,14 @@ df['PoliceDistrict'] = df['beat'].apply(lambda x: assign_police_district(int(x))
 df['CaseSort'] = 1
 df['Case'] = 'All Incidents'
 
+print(df['date'].max())
+
+
 drop_cols = [
     'id', 'case_number', 'date', 'block', 'primary_type', 'description', 'location_description', 'fbi_code',
     'x_coordinate', 'y_coordinate', 'updated_on', 'latitude', 'longitude', 'location', 'MONTH', 'DAY', 'arrest', 'iucr', 'domestic', 'year'
 ]
 df.drop(columns=drop_cols, inplace=True)
-
-print(df['date'].max())
 
 col_rename = {'district':'District','ward':'Ward','community_area':'CommunityArea'}
 df = df.rename(col_rename,axis=1)
