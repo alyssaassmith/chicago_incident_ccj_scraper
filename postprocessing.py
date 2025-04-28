@@ -115,7 +115,7 @@ df['YEAR'] = df['date'].dt.year
 
 df.columns
 
-df = df[(df['inc_data_read'] >= '2018-01-01') & (df['inc_data_read'] <= '2024-12-31')]
+df = df[df['inc_data_read'] >= '2018-01-01']
 
 lookup_path = "data/cpd_offense_lookup.csv"
 lookup = pd.read_csv(lookup_path, )
